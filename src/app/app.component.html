@@ -1,0 +1,79 @@
+<input type="text" (keydown)="onKeydownHandler($event)"  /> bdsfsd sdfsd
+<input type="text" (keyUp.escape)="sendit($event)" placeholder="here" />
+
+<style>
+    .logo {
+  background-color: red;
+  -webkit-mask: url(logo.svg) no-repeat center;
+  mask: url(logo.svg) no-repeat center;
+}
+</style>
+
+<div class="logo"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<div class="text-center rating mt-5 pt-5">
+<form name="editForm" role="form" novalidate [formGroup]="editForm">
+
+    <div class="mb-2">
+        <div class="heading-1 text-center">Thank you</div>
+
+        <div class="mr-4 my-2">
+            <div class="pt-4">How was your experiance ?</div>
+            <div class="text-nowrap" style="direction: rtl;">
+            <ng-container *ngFor="let star of starValues">
+                <a><input
+                    (click)="onClickValue(star)"
+                    name="stars"
+                    [id]="'e' + star"
+                    [value]="star"
+                    type="radio"/>
+                </a>
+                <label
+                    [ngClass]="selectedRating >= star ? 'star-rating' : ''"
+                    [for]="'e' + star">☆</label>
+            </ng-container>
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="form-group pl-5"
+        *ngIf="takeSuggestion"
+        style="">
+
+<span for="exampleFormControlTextarea1" style="font-size: 16px"
+      class="d-block py-2 text-center">Suggestion</span>
+        <textarea
+            formControlName="suggestion"
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            placeholder="How can we make it better?"></textarea>
+    </div>
+
+    <div class="text-center pt-2">
+        <button type="submit" class="btn btn-warning m-1" (click)="back()">Back</button>
+        <button
+            type="submit"
+            (click)="save()"
+            id="save-entity"
+            [disabled]="!selectedRating"
+            class="btn btn-primary">
+            Submit & Logout
+        </button>
+    </div>
+</form>
+
+<div class="mt-5 text-center">
+    This page will automatically redirect within
+    <span class="" style="color: #f25d5a"> {{ countDownDisplay }}</span>
+    <p class="progress-bar-spacing p-0 m-0">
+      
+    </p>
+</div>
+
+</div>
+
+
